@@ -1,0 +1,22 @@
+---
+- name: Setup Nginx webserver
+  host: rocky
+  remote_user: ansible
+
+  tasks:
+
+  - name: Upgrade all packages
+  ansible.builtin.dnf:
+    name: "*"
+    state: latest
+
+  - name: Install Ngnix
+    ansible.builtin.dnf:
+      name: ngnix
+      state: latest
+
+  - name: Stat Ngnix
+    ansible.builtin.service:
+    name: ngnix
+    state: started
+  
