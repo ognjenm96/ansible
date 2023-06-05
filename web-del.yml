@@ -1,0 +1,12 @@
+---
+- name: Setup Nginx webserver
+  hosts: rocky
+  remote_user: ansible
+  become: true
+
+  tasks:
+  - name: Remove Nginx
+    ansible.builtin.dnf:
+      name: nginx
+      state: removed
+  
