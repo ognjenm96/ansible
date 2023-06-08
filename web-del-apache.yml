@@ -1,0 +1,26 @@
+---
+- name: Remove Apache webserver
+  hosts: rocky
+  remote_user: ansible
+  become: true
+
+  tasks:
+  - name: Remove APache
+    ansible.builtin.dnf:
+      name: httpd
+      state: removed
+  - name: Disable http trafic on firewall
+    ansible.posix.firewalld:
+      port: 80/tcp
+      permanent: true
+      state: disabled
+  - name: Disable http trafic on firewall
+    ansible.posix.firewalld:
+      port: 443/tcp
+      permanent: true
+      state: disabled
+  - name: Restart firewalled
+    ansible.builtin.service:
+      name: firewalld
+      state: restarted
+  
