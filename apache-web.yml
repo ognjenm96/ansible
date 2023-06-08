@@ -1,0 +1,30 @@
+---
+- name:
+  hosts: rocky
+  become: yes
+
+  tasks: 
+  - name: Insatll Apache 
+    ansible.builtin.yum:
+      name: httpd
+      state: latest
+  - name: Install lynx
+    ansible.builtin.yum:
+      name: lynx
+      state: latest
+  - name: Enable http trafic on firewall
+    ansible.posix.firewalld:
+      service:
+        - http
+        - https
+      permanent: true
+      state: enabled
+  - name: Restart firewalled
+    ansible.builtin.service:
+      name: firewalld
+      state: restarted
+  - name:
+    ansible.builtin.service:
+      name: httpd
+      state: started
+      enabled: yes
