@@ -14,9 +14,7 @@
       state: latest
   - name: Enable http trafic on firewall
     ansible.posix.firewalld:
-      service:
-        - http
-        - https
+      port: 80/tcp
       permanent: true
       state: enabled
   - name: Restart firewalled
