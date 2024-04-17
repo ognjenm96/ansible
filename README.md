@@ -1,1 +1,1 @@
-# ansible
+# bash scripts && ansible yaml
