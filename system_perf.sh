@@ -1,8 +1,9 @@
 #!/bin/bash
-echo "RAM stats:"
+echo -e "RAM stats:"
 free -h
-echo " "
-echo "Disk space"
-df -h # fix this part | awk '{print $0 $3 $4 $5}'
-echo " "
-uptime -p
+echo
+echo -e "Disk space:"
+df -h | awk '{print $1,$2,$4,$5}' | column -t
+echo
+echo -e 'Uptime:'
+uptime
